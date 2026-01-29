@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use((req, res, next) => {
     console.log(`[DEBUG] ${req.method} ${req.url}`);
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
