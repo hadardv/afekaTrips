@@ -45,7 +45,7 @@ export default function LoginPage() {
                         <input
                             type="text"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-right"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 text-black focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-right"
                             placeholder="הכנס שם משתמש"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -57,7 +57,7 @@ export default function LoginPage() {
                         <input
                             type="password"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-right"
+                            className="w-full px-4 py-3 rounded-xl border text-black border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none text-right"
                             placeholder="הכנס סיסמה"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
