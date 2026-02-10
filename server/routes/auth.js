@@ -50,6 +50,14 @@ router.post('/login', async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
+
+        res.cookie('token', token, {
+            httpOnly: false, // Allow client code to read it if needed, or just for middleware
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000 // 15 minutes
+        });
+
         res.json({ token, studentName: user.studentName });
     } catch (err) {
         res.status(500).json({ message: 'Server error', error: err.message });
@@ -70,6 +78,13 @@ router.post('/refresh', async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '15m' }
         );
+
+        res.cookie('token', newToken, {
+            httpOnly: false,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000 // 15 minutes
+        });
 
         res.json({ token: newToken });
     } catch (err) {

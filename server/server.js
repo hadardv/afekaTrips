@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth');
 const tripRoutes = require('./routes/trips');
+const aiRoutes = require('./routes/ai');
+const weatherRoutes = require('./routes/weather');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -29,6 +31,8 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/weather', weatherRoutes);
 
 
 mongoose.connect(process.env.MONGODB_URI)

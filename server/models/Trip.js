@@ -11,13 +11,13 @@ const tripSchema = new mongoose.Schema({
         required: true
     },
     location: {
-        type: String, // City/Country
+        type: String,
         required: true
     },
     tripType: {
         type: String,
         required: true,
-        enum: ['Trek', 'Cycling', 'Urban', 'Nature']
+        enum: ['Trek', 'Cycling']
     },
     durationDays: {
         type: Number,
