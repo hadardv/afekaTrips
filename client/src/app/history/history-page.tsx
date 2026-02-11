@@ -6,10 +6,12 @@ import { motion } from 'framer-motion';
 import { MapPin, Calendar, Trash2, Clock, ArrowRight, Loader2 } from 'lucide-react';
 import api from '@/lib/api';
 import toast from 'react-hot-toast';
+import HistoryCard, { Trip } from '../history_card/history-card';
 
 export default function HistoryPage() {
     const [trips, setTrips] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedTrip, setSelectedTrip] = useState<Trip>();
 
     useEffect(() => {
         const fetchTrips = async () => {
@@ -37,6 +39,11 @@ export default function HistoryPage() {
             console.error(err);
             toast.error('Delete not implemented yet (or failed)');
         }
+    };
+
+    const handleViewDetails = (id: string) => {
+        setSelectedTrip(trips.find(t => t._id === id));
+        console.log(selectedTrip);
     };
 
     if (loading) {
@@ -68,6 +75,7 @@ export default function HistoryPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {trips.map((trip, index) => (
+                            console.log(`https://image.pollinations.ai/prompt/${encodeURIComponent(trip.tripType + ' trip in ' + trip.location + ' landscape')}?width=800&height=600&nologo=true`),
                             <motion.div
                                 key={trip._id}
                                 initial={{ opacity: 0, y: 20 }}
@@ -77,10 +85,14 @@ export default function HistoryPage() {
                             >
                                 <div className="h-48 overflow-hidden relative">
                                     <img
-                                        src={trip.imageUrl || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop'}
+                                        src={`https://loremflickr.com/800/600/${trip.location},landscape/all`}
+                                        onError={(e) => {
+                                            e.currentTarget.src = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop';
+                                        }}
                                         alt={trip.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                     />
+
                                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                                         {trip.tripType}
                                     </div>
@@ -100,9 +112,11 @@ export default function HistoryPage() {
                                     </div>
 
                                     <div className="flex items-center justify-between mt-6">
-                                        <button className="text-indigo-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                                        <button onClick={() => handleViewDetails(trip._id)} className="text-indigo-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                                             View Details <ArrowRight size={16} />
                                         </button>
+
+
 
                                         <button
                                             onClick={() => handleDelete(trip._id)}
@@ -117,6 +131,13 @@ export default function HistoryPage() {
                     </div>
                 )}
             </div>
+
+            {selectedTrip && (
+                <HistoryCard
+                    entry={selectedTrip}
+                    onClose={() => setSelectedTrip(undefined)}
+                />
+            )}
         </div>
     );
 }

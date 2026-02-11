@@ -205,14 +205,13 @@ export default function PlannerPage() {
                                     </button>
                                 </div>
 
-                                {/* Weather Forecast */}
                                 {tripData.weatherForecast?.daily && (
                                     <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
                                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                                             <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center">
                                                 <Compass size={18} />
                                             </div>
-                                            3-Day Forecast
+                                            Three Day Forecast
                                         </h3>
                                         <div className="grid grid-cols-3 gap-4">
                                             {tripData.weatherForecast.daily.time.slice(0, 3).map((date: string, idx: number) => (
