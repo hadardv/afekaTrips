@@ -33,13 +33,13 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign(
             { id: user._id, username: user.username, studentName: user.studentName },
             process.env.JWT_SECRET,
-            { expiresIn: '15m' } // Short lived access token
+            { expiresIn: '1d' } // Short lived access token
         );
 
         const refreshToken = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET,
-            { expiresIn: '7d' } // Longer lived refresh token
+            { expiresIn: '1d' } // Longer lived refresh token
         );
 
         // Store refresh token in HttpOnly cookie
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
 
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
             httpOnly: false, // Allow client code to read it if needed, or just for middleware
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000 // 15 minutes
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
         res.json({ token, studentName: user.studentName });
@@ -76,14 +76,14 @@ router.post('/refresh', async (req, res) => {
         const newToken = jwt.sign(
             { id: user._id, username: user.username, studentName: user.studentName },
             process.env.JWT_SECRET,
-            { expiresIn: '15m' }
+            { expiresIn: '1d' }
         );
 
         res.cookie('token', newToken, {
             httpOnly: false,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 15 * 60 * 1000 // 15 minutes
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
         res.json({ token: newToken });
