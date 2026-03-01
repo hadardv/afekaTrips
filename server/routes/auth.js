@@ -42,19 +42,18 @@ router.post('/login', async (req, res) => {
             { expiresIn: '1d' } // Longer lived refresh token
         );
 
-        // Store refresh token in HttpOnly cookie
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
 
         res.cookie('token', token, {
             httpOnly: false, // Allow client code to read it if needed, or just for middleware
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
@@ -81,8 +80,8 @@ router.post('/refresh', async (req, res) => {
 
         res.cookie('token', newToken, {
             httpOnly: false,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
         });
 
