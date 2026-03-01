@@ -108,7 +108,6 @@ export default function HomePage() {
       <footer className="py-12 border-t border-gray-50">
         <div className="max-w-5xl mx-auto px-4 text-center text-gray-400 text-sm">
           <p>© 2026 אפקה - פיתוח בסביבת WEB</p>
-          <p className="mt-2 font-medium text-gray-500">מגישה: {user?.studentName || '---'}</p>
         </div>
       </footer>
     </div>
