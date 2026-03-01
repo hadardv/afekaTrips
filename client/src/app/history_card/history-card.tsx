@@ -43,6 +43,10 @@ export default function HistoryCard({ entry, onClose }: HistoryCardProps) {
         };
     }, []);
 
+    if (!entry) {
+        return null;
+    }
+
     const formattedDate = entry.createdAt
         ? format(new Date(entry.createdAt), 'MMMM d, yyyy')
         : 'Recently';
