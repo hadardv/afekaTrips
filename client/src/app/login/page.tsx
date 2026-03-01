@@ -1,1 +1,2 @@
-export { default } from './login-page';
+import LoginPage from './login-page';
+export default function Page() { return <LoginPage />; }

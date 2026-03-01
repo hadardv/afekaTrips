@@ -1,1 +1,2 @@
-export { default } from './history-page';
+import HistoryPage from './history-page';
+export default function Page() { return <HistoryPage />; }
