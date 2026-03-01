@@ -83,7 +83,7 @@ router.post('/refresh', async (req, res) => {
             httpOnly: false,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 24 * 60 * 60 * 1000 // 1 day
+            maxAge: 24 * 60 * 60 * 1000
         });
 
         res.json({ token: newToken });

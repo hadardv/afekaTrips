@@ -12,17 +12,13 @@ const weatherRoutes = require('./routes/weather');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    credentials: true,
+}));
+
 app.use((req, res, next) => {
     console.log(`[DEBUG] ${req.method} ${req.url}`);
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-    if (req.method === 'OPTIONS') {
-        console.log('[DEBUG] Responding to OPTIONS with 200');
-        return res.status(200).end();
-    }
     next();
 });
 app.use(express.json());
