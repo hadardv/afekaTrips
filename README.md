@@ -1,14 +1,13 @@
-# AfekaTrips 🌍✈️
+# AfekaTrips
 
 AfekaTrips is a comprehensive full-stack web application designed to help users plan, organize, and manage their trips effortlessly. The platform integrates AI-generated itineraries, real-time weather forecasts, and interactive maps to provide a seamless travel planning experience.
 
-## 🚀 Live Demo (Cloud URL)
+## Live Demo (Cloud URL)
 
 The application is deployed and accessible via the cloud:
-**[👉 Click here to visit AfekaTrips Live](https://YOUR_NETLIFY_OR_CLOUD_URL_HERE) ** 
-*(Replace with your actual live Netlify/Vercel/Render URL)*
+**[Click here to visit AfekaTrips Live](https://afekatrips.netlify.app/) ** 
 
-## ✨ Features
+## Features
 
 *   **User Authentication & Authorization**: Secure sign-up/login system using JWT (JSON Web Tokens) and password encryption (Bcrypt).
 *   **AI Trip Generator**: Personalized trip itineraries powered by Groq SDK AI based on user preferences, duration, and trip type.
@@ -16,7 +15,7 @@ The application is deployed and accessible via the cloud:
 *   **Weather Forecast Integration**: Real-time integration with OpenWeatherMap API for weather details at destination.
 *   **Responsive Design**: A sleek, modern user interface, fully responsive for both desktop and mobile devices.
 
-## 🏗️ Architecture
+## Architecture
 
 AfekaTrips is built with a modern, decoupled architecture:
 
@@ -26,7 +25,7 @@ AfekaTrips is built with a modern, decoupled architecture:
 
 ---
 
-## 🛠️ Installation & Local Setup
+## Installation & Local Setup
 
 Follow these instructions to run the project locally on your machine.
 
@@ -99,7 +98,7 @@ cd afekaTrips
 
 ---
 
-## 💡 Usage
+## Usage
 
 1. Open your browser and navigate to `http://localhost:3000`.
 2. Register a new account or log in if you already have one.
@@ -107,5 +106,5 @@ cd afekaTrips
 4. Let the AI generate an itinerary for you, view the route on the map, and check the weather forecast.
 5. Save your trips and view them later in your History area!
 
-## 📜 License
+## License
 This project is for educational purposes. All rights reserved to the creators.
