@@ -5,6 +5,7 @@ import api from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { User } from '@/interfaces/User';
 import { AuthContextType } from '@/interfaces/AuthContextType';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -22,13 +23,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                     const newToken = res.data.token;
                     localStorage.setItem('token', newToken);
 
-                    // In a real app, you'd decode the JWT to get the studentName
-                    // For now, let's assume login saves it in localStorage for convenience
-                    const storedName = localStorage.getItem('studentName');
-                    const storedUsername = localStorage.getItem('username');
-                    if (storedName && storedUsername) {
-                        setUser({ username: storedUsername, studentName: storedName });
-                    }
+                    const payload: any = jwtDecode(newToken);
+                    setUser({ username: payload.username, studentName: payload.studentName });
                 } catch (err) {
                     localStorage.removeItem('token');
                     setUser(null);
@@ -41,17 +37,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, []);
 
     const login = (token: string, studentName: string, username: string) => {
+        console.log(user);
         localStorage.setItem('token', token);
-        localStorage.setItem('studentName', studentName);
-        localStorage.setItem('username', username);
         setUser({ username, studentName });
         router.push('/');
     };
 
     const logout = async () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('studentName');
-        localStorage.removeItem('username');
         document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         setUser(null);
         router.push('/login');
